@@ -7,23 +7,29 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
+      # OpenVPN Configuration (Active Fallback)
       - VPN_SERVICE_PROVIDER=nordvpn
       - VPN_TYPE=openvpn
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Canada # Changed from SERVER_HOSTNAMES for better reliability
-    ports: # <-- Only qBittorrent's ports are published here
-      - "8081:8080"     # qBittorrent WebUI
-      - "6881:6881"
-      - "6881:6881/udp"
-    networks: # <-- Gluetun itself must also be on the shared network
+      - SERVER_COUNTRIES=Canada
+      
+      # WireGuard Configuration (Uncomment once NORDVPN_WIREGUARD_KEY is set in .env)
+      # - VPN_TYPE=wireguard
+      # - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
+    ports:
+      - "8081:8080"     # qBittorrent WebUI (through VPN)
+      - "9696:9696"     # Prowlarr WebUI (through VPN)
+      - "6881:6881"     # Torrent TCP
+      - "6881:6881/udp" # Torrent UDP
+    networks:
       - media_network
 
   qbittorrent:
     image: ghcr.io/hotio/qbittorrent:latest
     container_name: qbittorrent
     restart: unless-stopped
-    network_mode: "service:gluetun" # This is correct, forces qbit through the vpn
+    network_mode: "service:gluetun"
     depends_on:
       - gluetun
     environment:
@@ -32,22 +38,21 @@ services:
       - TZ=America/Toronto
     volumes:
       - ./config/qbittorrent:/config
-      - /mnt/data/downloads:/downloads
+      - /mnt/data:/data # <-- Restructured for atomic hard links
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     restart: unless-stopped
+    network_mode: "service:gluetun" # <-- Routed through VPN
+    depends_on:
+      - gluetun
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Toronto
     volumes:
       - ./config/prowlarr:/config
-    ports: # <-- Port is now on the service itself
-      - "9696:9696"
-    networks:
-      - media_network
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -59,9 +64,8 @@ services:
       - TZ=America/Toronto
     volumes:
       - ./config/sonarr:/config
-      - /mnt/data/media/tvshows:/tv
-      - /mnt/data/downloads:/downloads
-    ports: # <-- Port is now on the service itself
+      - /mnt/data:/data # <-- Restructured for atomic hard links
+    ports:
       - "8989:8989"
     networks:
       - media_network
@@ -76,9 +80,8 @@ services:
       - TZ=America/Toronto
     volumes:
       - ./config/radarr:/config
-      - /mnt/data/media/movies:/movies
-      - /mnt/data/downloads:/downloads
-    ports: # <-- Port is now on the service itself
+      - /mnt/data:/data # <-- Restructured for atomic hard links
+    ports:
       - "7878:7878"
     networks:
       - media_network
@@ -87,12 +90,12 @@ services:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     restart: unless-stopped
+    network_mode: "service:gluetun" # <-- Routed through VPN
+    depends_on:
+      - gluetun
     environment:
       - LOG_LEVEL=info
       - TZ=America/Toronto
-    # ports: <-- REMOVED FROM HERE
-    networks: # <-- ADD THIS
-      - media_network
 
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
@@ -118,31 +121,39 @@ services:
       - TZ=America/Toronto
     volumes:
       - ./bazarr-config:/config
-      - /mnt/data/media:/data/media
+      - /mnt/data:/data # <-- Restructured for atomic hard links
     ports:
       - 6767:6767
     restart: unless-stopped
+    networks:
+      - media_network
+
   whisper:
     image: onerahmet/openai-whisper-asr-webservice:latest
     container_name: whisper
     environment:
-      - ASR_MODEL=small   # Options: tiny, base, small, medium, large
+      - ASR_MODEL=small
       - ASR_ENGINE=openai_whisper
     volumes:
       - ./whisper-cache:/root/.cache/whisper
     ports:
       - 9000:9000
     restart: unless-stopped
+    networks:
+      - media_network
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true # Automatically deletes old images to save space
-      - WATCHTOWER_SCHEDULE=0 0 4 * * * # Runs every day at 4:00 AM
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 4 * * *
     restart: unless-stopped
+    networks:
+      - media_network
 
-networks: # <-- ADD THIS WHOLE SECTION AT THE VERY END
+networks:
   media_network:
     external: true
