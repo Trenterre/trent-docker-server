@@ -1,0 +1,7 @@
+services:
+  test-web:
+    image: nginx:alpine
+    container_name: test-nginx-deployment
+    ports:
+      - "8085:80"
+    restart: unless-stopped
