@@ -31,8 +31,13 @@ if (Test-Path docker-compose.yml) {
     Write-Warning "No docker-compose.yml found in the local workspace. Copying other configuration files."
 }
 
-if (Test-Path .env) {
-    scp .env "${RemoteHost}:${RemoteDir}/"
+$EnvPath = ".env"
+if (-not (Test-Path $EnvPath) -and (Test-Path "../.env")) {
+    $EnvPath = "../.env"
+}
+if (Test-Path $EnvPath) {
+    Write-Host "Copying environment configuration ($EnvPath)..."
+    scp $EnvPath "${RemoteHost}:${RemoteDir}/.env"
 }
 
 # 5. Run Docker Compose remotely
