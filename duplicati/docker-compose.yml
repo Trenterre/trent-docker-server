@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+      - SETTINGS_ENCRYPTION_KEY=${DUPLICATI_SETTINGS_ENCRYPTION_KEY}
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./config:/config
+      - /home/trent/docker:/source/docker # This makes your Docker configs available to back up

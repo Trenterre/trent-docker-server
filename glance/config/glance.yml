@@ -1,0 +1,74 @@
+theme:
+  background-color: 232 23 18
+  contrast-multiplier: 1.2
+  primary-color: 220 83 75
+  positive-color: 105 48 72
+  negative-color: 351 74 73
+
+pages:
+  - name: Stats
+    title: Server Dashboard
+    columns:
+      - size: full
+        widgets:
+          - type: clock
+            options:
+              show-seconds: true
+          - type: weather
+            location: Oshawa, Canada
+
+      - size: full
+        widgets:
+          - type: dns-stats
+            name: Pi-hole Network Stats
+            service: pihole-v6 # Corrected property
+            url: http://pihole
+           # username: admin
+            password: E/3qEcPz9F0viGzd5WrXs4/eCNhwl8zwcwfMJXpJj6Y=
+
+  - name: Apps
+    title: Applications
+    columns:
+      - size: small # <-- Your first empty small column
+        widgets: []
+
+      - size: full # <-- The main column with your bookmarks
+        widgets:
+          - type: bookmarks
+            groups:
+              - title: Media
+                links:
+                  - title: Jellyfin
+                    url: http://192.168.1.3:8096
+                    icon: si:jellyfin
+                  - title: Jellyseerr
+                    url: http://192.168.1.3:5055
+                    icon: mdi:movie-search
+              - title: Automation
+                links:
+                  - title: Sonarr
+                    url: http://192.168.1.3:8989
+                    icon: si:sonarr
+                  - title: Radarr
+                    url: http://192.168.1.3:7878
+                    icon: si:radarr
+                  - title: Prowlarr
+                    url: http://192.168.1.3:9696
+                    icon: mdi:magnify
+                  - title: Bazarr
+                    url: http://192.168.1.3:6767
+                    icon: si:bazarr
+              - title: Management
+                links:
+                  - title: qBittorrent
+                    url: http://192.168.1.3:8081
+                    icon: si:qbittorrent
+                  - title: Pi-hole
+                    url: http://192.168.1.3:8080/admin
+                    icon: si:pihole
+                  - title: Nginx Proxy Manager
+                    url: http://192.168.1.3:81
+                    icon: si:nginxproxymanager
+
+      - size: small # <-- Your second empty small column
+        widgets: []

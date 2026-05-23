@@ -1,0 +1,148 @@
+version: "3.7"
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Canada # Changed from SERVER_HOSTNAMES for better reliability
+    ports: # <-- Only qBittorrent's ports are published here
+      - "8081:8080"     # qBittorrent WebUI
+      - "6881:6881"
+      - "6881:6881/udp"
+    networks: # <-- Gluetun itself must also be on the shared network
+      - media_network
+
+  qbittorrent:
+    image: ghcr.io/hotio/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    network_mode: "service:gluetun" # This is correct, forces qbit through the vpn
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./config/qbittorrent:/config
+      - /mnt/data/downloads:/downloads
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./config/prowlarr:/config
+    ports: # <-- Port is now on the service itself
+      - "9696:9696"
+    networks:
+      - media_network
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./config/sonarr:/config
+      - /mnt/data/media/tvshows:/tv
+      - /mnt/data/downloads:/downloads
+    ports: # <-- Port is now on the service itself
+      - "8989:8989"
+    networks:
+      - media_network
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./config/radarr:/config
+      - /mnt/data/media/movies:/movies
+      - /mnt/data/downloads:/downloads
+    ports: # <-- Port is now on the service itself
+      - "7878:7878"
+    networks:
+      - media_network
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - TZ=America/Toronto
+    # ports: <-- REMOVED FROM HERE
+    networks: # <-- ADD THIS
+      - media_network
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./config/jellyseerr:/app/config
+    ports:
+      - "5055:5055"
+    networks:
+      - media_network
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - ./bazarr-config:/config
+      - /mnt/data/media:/data/media
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+  whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: whisper
+    environment:
+      - ASR_MODEL=small   # Options: tiny, base, small, medium, large
+      - ASR_ENGINE=openai_whisper
+    volumes:
+      - ./whisper-cache:/root/.cache/whisper
+    ports:
+      - 9000:9000
+    restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true # Automatically deletes old images to save space
+      - WATCHTOWER_SCHEDULE=0 0 4 * * * # Runs every day at 4:00 AM
+    restart: unless-stopped
+
+networks: # <-- ADD THIS WHOLE SECTION AT THE VERY END
+  media_network:
+    external: true

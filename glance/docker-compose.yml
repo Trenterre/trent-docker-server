@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  glance:
+    image: glanceapp/glance
+    container_name: glance
+    restart: unless-stopped
+    ports:
+      - "61209:8080" # Using a new port to avoid any conflicts
+    volumes:
+      - ./config:/app/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    networks:
+      - media_network
+
+networks:
+  media_network:
+    external: true

@@ -1,0 +1,23 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    environment:
+      - TZ=America/Toronto
+    ports:
+      - "8096:8096"
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /mnt/data/media/movies:/media/movies
+      - /mnt/data/media/tvshows:/media/tvshows
+      - /mnt/data/media/music:/media/music
+    networks: # <-- ADD THIS SECTION...
+      - media_network
+
+networks: # <-- ...AND ADD THIS WHOLE SECTION AT THE END
+  media_network:
+    external: true
