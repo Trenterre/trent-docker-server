@@ -13,6 +13,7 @@ services:
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - SERVER_COUNTRIES=Canada
+      - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24 # Allows LAN access to exposed ports
       
       # WireGuard Configuration (Uncomment once NORDVPN_WIREGUARD_KEY is set in .env)
       # - VPN_TYPE=wireguard
