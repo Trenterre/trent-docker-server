@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 
 # 1. Define remote destination
 $RemoteHost = "dockersrv"
-$RemoteDir = "~/docker-deploy/$ServicePath"
+$RemoteDir = "~/docker/$ServicePath"
 
 Write-Host "🚀 Starting deployment to $RemoteHost..." -ForegroundColor Cyan
 
