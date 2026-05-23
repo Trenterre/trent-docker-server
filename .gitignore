@@ -1,0 +1,19 @@
+# Secrets & Credentials
+.env
+.env.*
+*.pem
+*.key
+id_*
+
+# SSH Configuration inside workspace (if any)
+.ssh/
+
+# OS/System files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary & Log files
+*.tmp
+*.log
+.ssh_connection_test
