@@ -9,17 +9,17 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=nordvpn
       
-      # OpenVPN Configuration (Commented out)
-      # - VPN_TYPE=openvpn
-      # - OPENVPN_USER=${OPENVPN_USER}
-      # - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      # - SERVER_COUNTRIES=Canada
+      # OpenVPN Configuration (Active)
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Canada
       
-      # WireGuard Configuration (Active)
-      - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
-      - DNS_UPSTREAM_RESOLVER_TYPE=plain
-      - DNS_UPSTREAM_PLAIN_ADDRESSES=10.5.0.1:53,1.1.1.1:53
+      # WireGuard Configuration (Commented out)
+      # - VPN_TYPE=wireguard
+      # - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
+      # - DNS_UPSTREAM_RESOLVER_TYPE=plain
+      # - DNS_UPSTREAM_PLAIN_ADDRESSES=10.5.0.1:53,1.1.1.1:53
       
       # Critical Common Settings (Required for LAN Access & Stable DNS)
       - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24 # Allows LAN access to exposed ports
