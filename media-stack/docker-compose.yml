@@ -14,20 +14,20 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=nordvpn
       
-      # OpenVPN Configuration (Active - WireGuard key needs registration first)
-      - VPN_TYPE=openvpn
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Canada
-      
-      # WireGuard Configuration (Uncomment after registering key with NordVPN API)
-      # - VPN_TYPE=wireguard
-      # - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
-      # - WIREGUARD_IMPLEMENTATION=userspace
+      # OpenVPN Configuration (Fallback - uncomment if WireGuard breaks)
+      # - VPN_TYPE=openvpn
+      # - OPENVPN_USER=${OPENVPN_USER}
+      # - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       # - SERVER_COUNTRIES=Canada
-      # - DNS_UPSTREAM_RESOLVER_TYPE=plain
-      # - DNS_UPSTREAM_PLAIN_ADDRESSES=1.1.1.1:53,8.8.8.8:53
-      
+
+      # WireGuard Configuration (Active)
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
+      - WIREGUARD_IMPLEMENTATION=userspace
+      - SERVER_COUNTRIES=Canada
+      - DNS_UPSTREAM_RESOLVER_TYPE=plain
+      - DNS_UPSTREAM_PLAIN_ADDRESSES=1.1.1.1:53,8.8.8.8:53
+
       # Critical Common Settings (Required for LAN Access & Stable DNS)
       - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24
       - FIREWALL_INPUT_PORTS=8080,9696,8191
