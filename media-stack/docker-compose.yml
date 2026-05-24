@@ -7,19 +7,22 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      # OpenVPN Configuration (Active Fallback)
       - VPN_SERVICE_PROVIDER=nordvpn
-      - VPN_TYPE=openvpn
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Canada
+      
+      # OpenVPN Configuration (Commented out)
+      # - VPN_TYPE=openvpn
+      # - OPENVPN_USER=${OPENVPN_USER}
+      # - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      # - SERVER_COUNTRIES=Canada
+      
+      # WireGuard Configuration (Active)
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
+      
+      # Critical Common Settings (Required for LAN Access & Stable DNS)
       - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24 # Allows LAN access to exposed ports
       - DNS_KEEP_NAMESERVERS=on # Prevents Unbound DNS hangs and blocklist download timeouts
       - BLOCK_MALICIOUS=off # Disables DNS blocklists download to prevent boot hangs
-      
-      # WireGuard Configuration (Uncomment once NORDVPN_WIREGUARD_KEY is set in .env)
-      # - VPN_TYPE=wireguard
-      # - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
     ports:
       - "8081:8080"     # qBittorrent WebUI (through VPN)
       - "9696:9696"     # Prowlarr WebUI (through VPN)
