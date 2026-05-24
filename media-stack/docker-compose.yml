@@ -6,23 +6,31 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun # Required for userspace WireGuard TUN interface
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1 # Required for WireGuard routing
+      - net.ipv6.conf.all.disable_ipv6=1   # Disable IPv6 to avoid iptables6 issues
     environment:
       - VPN_SERVICE_PROVIDER=nordvpn
       
-      # OpenVPN Configuration (Active)
-      - VPN_TYPE=openvpn
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Canada
+      # OpenVPN Configuration (Commented out)
+      # - VPN_TYPE=openvpn
+      # - OPENVPN_USER=${OPENVPN_USER}
+      # - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      # - SERVER_COUNTRIES=Canada
       
-      # WireGuard Configuration (Commented out)
-      # - VPN_TYPE=wireguard
-      # - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
-      # - DNS_UPSTREAM_RESOLVER_TYPE=plain
-      # - DNS_UPSTREAM_PLAIN_ADDRESSES=10.5.0.1:53,1.1.1.1:53
+      # WireGuard Configuration (Active)
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${NORDVPN_WIREGUARD_KEY}
+      - WIREGUARD_IMPLEMENTATION=userspace
+      - SERVER_COUNTRIES=Canada
+      - DNS_UPSTREAM_RESOLVER_TYPE=plain
+      - DNS_UPSTREAM_PLAIN_ADDRESSES=1.1.1.1:53,8.8.8.8:53
       
       # Critical Common Settings (Required for LAN Access & Stable DNS)
       - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24 # Allows LAN access to exposed ports
+      - FIREWALL_INPUT_PORTS=8080,9696,8191      # Allow inbound to qBittorrent, Prowlarr, Flaresolverr through VPN namespace
       - DNS_KEEP_NAMESERVERS=on # Prevents Unbound DNS hangs and blocklist download timeouts
       - BLOCK_MALICIOUS=off # Disables DNS blocklists download to prevent boot hangs
     ports:
