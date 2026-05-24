@@ -15,6 +15,7 @@ services:
       - SERVER_COUNTRIES=Canada
       - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24 # Allows LAN access to exposed ports
       - DNS_KEEP_NAMESERVERS=on # Prevents Unbound DNS hangs and blocklist download timeouts
+      - BLOCK_MALICIOUS=off # Disables DNS blocklists download to prevent boot hangs
       
       # WireGuard Configuration (Uncomment once NORDVPN_WIREGUARD_KEY is set in .env)
       # - VPN_TYPE=wireguard
