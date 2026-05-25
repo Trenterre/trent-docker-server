@@ -12,6 +12,7 @@ services:
       - PGID=1000
       - TZ=America/Toronto
       - DB_CONNECTION=sqlite
+      - DB_DATABASE=/config/database.sqlite
       - APP_KEY=base64:eGl0MTIzNDU2Nzg5MGFiY2RlZmdoaWprbG1ub3BxcnM=
     networks:
       - media_network

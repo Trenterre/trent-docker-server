@@ -12,6 +12,7 @@
 
 - glances:
     url: http://glances:61208
+    version: 4
     label: server
     cpu: true
     ram: true
