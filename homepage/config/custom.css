@@ -1,16 +1,36 @@
 /* custom.css - Sleek Cyberpunk-Neon Theme for Homepage */
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
 
-/* 1. Global Page Background & Typography */
+/* 1. Global Page Background & Holographic Tech-Grid */
+@keyframes cyberNebula {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 body {
-    background-color: #07080e !important;
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 0, 85, 0.07) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 255, 204, 0.07) 0px, transparent 50%),
-        radial-gradient(at 50% 0%, rgba(188, 0, 221, 0.04) 0px, transparent 50%) !important;
+    background: linear-gradient(135deg, #05060b, #0c0512, #041012, #07080e) !important;
+    background-size: 300% 300% !important;
+    animation: cyberNebula 25s ease infinite !important;
     font-family: 'Rajdhani', sans-serif !important;
     color: #c9ccd8 !important;
     letter-spacing: 0.02em;
+    position: relative;
+}
+
+body::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -1 !important;
+    background-image: 
+        linear-gradient(rgba(0, 255, 204, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 204, 0.012) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    pointer-events: none !important;
 }
 
 /* 2. Cyberpunk Category & Section Headers */
