@@ -1,46 +1,23 @@
-/* custom.css - Sleek Cyberpunk-Neon Theme for Homepage */
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+/* custom.css - Sleek Trading Bot mimic theme with dynamic floating blobs and premium glassmorphism */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* 1. Global Page Background & Holographic Tech-Grid */
-@keyframes rotateNebula {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
+/* 1. Global Page Background & Layout Tweaks */
 html {
-    background-color: #07080e !important;
+    background-color: #04050d !important;
 }
 
 body {
     background-color: transparent !important;
-    background: transparent !important;
-    font-family: 'Rajdhani', sans-serif !important;
-    color: #c9ccd8 !important;
-    letter-spacing: 0.02em;
+    background: radial-gradient(circle at 50% 50%, #0a0d22 0%, #04050d 100%) !important; 
+    background-attachment: fixed !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* Rotating holographic space nebula (GPU Accelerated, perfectly centered square) */
-body::after {
-    content: "" !important;
-    position: fixed !important;
-    top: calc(50vh - 100vmax) !important;
-    left: calc(50vw - 100vmax) !important;
-    width: 200vmax !important;
-    height: 200vmax !important;
-    z-index: -2 !important;
-    background: 
-        radial-gradient(circle at 30% 30%, rgba(255, 0, 85, 0.12) 0%, transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(0, 255, 204, 0.12) 0%, transparent 55%),
-        radial-gradient(circle at 50% 50%, rgba(188, 0, 221, 0.08) 0%, transparent 60%) !important;
-    animation: rotateNebula 30s linear infinite !important;
-    transform-origin: center center !important;
-    pointer-events: none !important;
-}
-
-/* Force Next.js, main layouts, and Tailwind background utility wrappers to be transparent */
+/* Force Next.js wrappers, main layout divs, and sidebar classes to be transparent */
 #__next, 
 .layout, 
 #app, 
@@ -58,135 +35,218 @@ span[class*="bg-"] {
     background-color: transparent !important;
 }
 
+/* 2. Keyframe Animations for Floating Blobs */
+@keyframes float-blob1 {
+    0% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg); }
+    33% { transform: translate3d(240px, -280px, 0px) scale(1.4) rotate(120deg); }
+    66% { transform: translate3d(-180px, 150px, 0px) scale(0.7) rotate(240deg); }
+    100% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(360deg); }
+}
+@keyframes float-blob2 {
+    0% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg); }
+    25% { transform: translate3d(-280px, 220px, 0px) scale(0.7) rotate(-90deg); }
+    50% { transform: translate3d(150px, -180px, 0px) scale(1.3) rotate(-180deg); }
+    75% { transform: translate3d(220px, 180px, 0px) scale(0.9) rotate(-270deg); }
+    100% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(-360deg); }
+}
+@keyframes float-blob3 {
+    0% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg); }
+    50% { transform: translate3d(320px, 260px, 0px) scale(1.4) rotate(180deg); }
+    100% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(360deg); }
+}
+@keyframes float-blob4 {
+    0% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(0deg); }
+    33% { transform: translate3d(-220px, 190px, 0px) scale(1.3) rotate(-120deg); }
+    66% { transform: translate3d(180px, -240px, 0px) scale(0.75) rotate(-240deg); }
+    100% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(-360deg); }
+}
+
+/* 3. Ambient Floating Light Blobs (GPU Accelerated, mapped to standard HTML/Body pseudo-elements) */
+html::before {
+    content: "" !important;
+    position: fixed !important;
+    width: 600px !important;
+    height: 600px !important;
+    border-radius: 50% !important;
+    background: rgba(16, 185, 129, 0.2) !important; /* emerald-500/30 equivalent adjusted */
+    filter: blur(90px) !important;
+    top: -150px !important;
+    left: -150px !important;
+    z-index: -10 !important;
+    pointer-events: none !important;
+    animation: float-blob1 25s infinite ease-in-out !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+}
+
+html::after {
+    content: "" !important;
+    position: fixed !important;
+    width: 700px !important;
+    height: 700px !important;
+    border-radius: 50% !important;
+    background: rgba(99, 102, 241, 0.18) !important; /* indigo-500/25 equivalent */
+    filter: blur(100px) !important;
+    bottom: -250px !important;
+    right: -150px !important;
+    z-index: -9 !important;
+    pointer-events: none !important;
+    animation: float-blob2 30s infinite ease-in-out !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+}
+
 body::before {
     content: "" !important;
     position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: -1 !important;
-    background-image: 
-        linear-gradient(rgba(0, 255, 204, 0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 204, 0.012) 1px, transparent 1px) !important;
-    background-size: 40px 40px !important;
+    width: 500px !important;
+    height: 500px !important;
+    border-radius: 50% !important;
+    background: rgba(168, 85, 247, 0.15) !important; /* purple-500/20 equivalent */
+    filter: blur(80px) !important;
+    top: 40% !important;
+    left: 45% !important;
+    z-index: -8 !important;
     pointer-events: none !important;
+    animation: float-blob3 27s infinite ease-in-out !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
 }
 
-/* 2. Cyberpunk Category & Section Headers */
+body::after {
+    content: "" !important;
+    position: fixed !important;
+    width: 550px !important;
+    height: 550px !important;
+    border-radius: 50% !important;
+    background: rgba(236, 72, 153, 0.15) !important; /* pink-500/20 equivalent */
+    filter: blur(95px) !important;
+    top: 10% !important;
+    right: 25% !important;
+    z-index: -7 !important;
+    pointer-events: none !important;
+    animation: float-blob4 32s infinite ease-in-out !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+}
+
+/* 4. Category & Group Headers */
 h2, .group-header {
-    font-family: 'Oxanium', sans-serif !important;
-    font-weight: 800 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.18em !important;
-    color: #ff0055 !important;
-    text-shadow: 0 0 10px rgba(255, 0, 85, 0.6) !important;
-    border-bottom: 2px solid #00ffcc !important;
+    letter-spacing: 0.12em !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.25) !important;
     display: inline-block !important;
     padding-bottom: 6px !important;
     margin-bottom: 24px !important;
     position: relative;
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.3) !important;
 }
 
-/* Slanted tech tag effect on headers */
 h2::after, .group-header::after {
-    content: " // SYS_ACTIVE";
-    font-size: 0.55em;
+    content: " // ACTIVE";
+    font-size: 0.6em;
     font-weight: 600;
-    color: #00ffcc;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
-    vertical-align: middle;
+    color: #6366f1; /* Indigo accent */
+    letter-spacing: 0.05em;
     margin-left: 8px;
 }
 
-/* 3. Sleek Frosted Glass Grid Elements (Glassmorphism) */
+/* 5. High-Fidelity Glassmorphism Cards */
 .service-card, .bookmark-card, .widget-container, .widget {
-    background: rgba(13, 15, 28, 0.45) !important; /* Semi-transparent base */
-    backdrop-filter: blur(16px) saturate(140%) !important; /* High refraction frosted glass */
-    -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Polished glass border */
-    border-top: 1px solid rgba(255, 255, 255, 0.12) !important; /* Light reflection on top edge */
-    border-radius: 12px !important; /* Softer, modern corners */
-    box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.08), /* Inner reflection */
-        0 12px 40px rgba(0, 0, 0, 0.45) !important; /* Drop shadow */
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    background: rgba(14, 17, 36, 0.45) !important; 
+    backdrop-filter: blur(16px) !important; 
+    -webkit-backdrop-filter: blur(16px) !important; 
+    border: 1px solid rgba(99, 102, 241, 0.15) !important; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05) !important; 
+    border-radius: 16px !important; 
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    will-change: transform !important;
+    transition: border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* 4. Glass Hover Glow and Slide Transitions */
-.service-card:hover, .bookmark-card:hover {
-    background: rgba(255, 255, 255, 0.07) !important; /* Brighter glass on hover */
-    border-color: rgba(0, 255, 204, 0.4) !important;
-    border-top-color: rgba(0, 255, 204, 0.6) !important;
-    box-shadow: 
-        inset 0 1px 2px rgba(255, 255, 255, 0.15),
-        0 0 25px rgba(0, 255, 204, 0.25),
-        0 8px 32px rgba(0, 255, 204, 0.1) !important;
-    transform: translateY(-4px) scale(1.005) !important;
+/* 6. Interactive Neon Hover Accents */
+
+/* Dynamic Emerald Hover Accent (System telemetry, resolvers, etc.) */
+.service-card:has(a[href*="pihole"]):hover,
+.service-card:has(a[href*="glances"]):hover,
+.service-card:has(a[href*="proxmox"]):hover {
+    border-color: rgba(16, 185, 129, 0.6) !important;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transform: translateY(-3px) !important;
 }
 
-/* 5. Custom Themed Highlights (Frosted Color Bleed) */
-/* Media apps (Electric purple bleed) */
-.service-card:has(a[href*="jellyfin"]):hover, 
-.service-card:has(a[href*="seerr"]):hover {
-    border-color: rgba(188, 0, 221, 0.4) !important;
-    border-top-color: rgba(188, 0, 221, 0.6) !important;
-    box-shadow: 
-        inset 0 1px 2px rgba(255, 255, 255, 0.15),
-        0 0 25px rgba(188, 0, 221, 0.25),
-        0 8px 32px rgba(188, 0, 221, 0.1) !important;
+/* Dynamic Blue Hover Accent (Downloader, WAN specs, backup nodes) */
+.service-card:has(a[href*="qbittorrent"]):hover,
+.service-card:has(a[href*="speedtest"]):hover,
+.service-card:has(a[href*="npm"]):hover,
+.service-card:has(a[href*="duplicati"]):hover {
+    border-color: rgba(59, 130, 246, 0.6) !important;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transform: translateY(-3px) !important;
 }
 
-/* Downloader & Automation apps (Neon magenta bleed) */
+/* Dynamic Purple Hover Accent (Media Stream Engines & Automated Orchestration) */
+.service-card:has(a[href*="jellyfin"]):hover,
+.service-card:has(a[href*="seerr"]):hover,
 .service-card:has(a[href*="sonarr"]):hover,
 .service-card:has(a[href*="radarr"]):hover,
+.service-card:has(a[href*="bazarr"]):hover,
 .service-card:has(a[href*="prowlarr"]):hover {
-    border-color: rgba(255, 0, 85, 0.4) !important;
-    border-top-color: rgba(255, 0, 85, 0.6) !important;
-    box-shadow: 
-        inset 0 1px 2px rgba(255, 255, 255, 0.15),
-        0 0 25px rgba(255, 0, 85, 0.25),
-        0 8px 32px rgba(255, 0, 85, 0.1) !important;
+    border-color: rgba(168, 85, 247, 0.6) !important;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transform: translateY(-3px) !important;
 }
 
-/* 6. Glow-effects on Live Stats Indicators & Search */
+/* Generic Fallback Accent (Indigo) for bookmarks and default blocks */
+.service-card:hover, .bookmark-card:hover {
+    border-color: rgba(99, 102, 241, 0.6) !important;
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* 7. Glow-effects on Live Stats Indicators & Search */
 .status-indicator, span[class*="indicator"] {
     box-shadow: 0 0 8px currentColor, 0 0 3px currentColor !important;
 }
 
 /* Search bar styling */
 input[type="text"], input[type="search"] {
-    background-color: rgba(11, 13, 24, 0.9) !important;
-    border: 1px solid rgba(0, 255, 204, 0.2) !important;
-    font-family: 'Rajdhani', sans-serif !important;
-    color: #00ffcc !important;
-    border-radius: 6px !important;
+    background-color: rgba(14, 17, 36, 0.65) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.3s ease !important;
 }
 
 input[type="text"]:focus {
-    border-color: #ff0055 !important;
+    border-color: rgba(99, 102, 241, 0.6) !important;
     box-shadow: 
-        0 0 10px rgba(255, 0, 85, 0.3),
-        inset 0 0 5px rgba(255, 0, 85, 0.1) !important;
+        0 0 15px rgba(99, 102, 241, 0.3),
+        inset 0 0 5px rgba(99, 102, 241, 0.1) !important;
 }
 
-/* 7. Scrollbar custom styled */
+/* 8. Custom Scrollbars mimicking the new aesthetic */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #07080e;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 255, 204, 0.3);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 3px;
+    transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #ff0055;
+    background: rgba(255, 255, 255, 0.25);
 }
