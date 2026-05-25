@@ -107,7 +107,7 @@
         container: duplicati
 
     - Speedtest Tracker:
-        icon: speedtest-tracker.svg
+        icon: speedtest-tracker.png
         href: http://192.168.1.3:8086
         description: WAN Speed Diagnostics
         server: my-docker
