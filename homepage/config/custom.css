@@ -100,44 +100,54 @@ h2::after, .group-header::after {
     margin-left: 8px;
 }
 
-/* 3. Sleek Card Container Grid Elements */
+/* 3. Sleek Frosted Glass Grid Elements (Glassmorphism) */
 .service-card, .bookmark-card, .widget-container, .widget {
-    background-color: rgba(11, 13, 24, 0.8) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(0, 255, 204, 0.12) !important;
-    border-radius: 8px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* 4. Responsive Hover Glow and Translation Effects */
-.service-card:hover, .bookmark-card:hover {
-    border-color: #00ffcc !important;
+    background: rgba(13, 15, 28, 0.45) !important; /* Semi-transparent base */
+    backdrop-filter: blur(16px) saturate(140%) !important; /* High refraction frosted glass */
+    -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important; /* Polished glass border */
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important; /* Light reflection on top edge */
+    border-radius: 12px !important; /* Softer, modern corners */
     box-shadow: 
-        0 0 20px rgba(0, 255, 204, 0.35),
-        inset 0 0 8px rgba(0, 255, 204, 0.15) !important;
-    transform: translateY(-3px) scale(1.008) !important;
+        inset 0 1px 1px rgba(255, 255, 255, 0.08), /* Inner reflection */
+        0 12px 40px rgba(0, 0, 0, 0.45) !important; /* Drop shadow */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* 5. Custom Themed Highlights per Application Class */
-/* Media apps (Jellyfin, Jellyseerr) get neon electric purple borders */
+/* 4. Glass Hover Glow and Slide Transitions */
+.service-card:hover, .bookmark-card:hover {
+    background: rgba(255, 255, 255, 0.07) !important; /* Brighter glass on hover */
+    border-color: rgba(0, 255, 204, 0.4) !important;
+    border-top-color: rgba(0, 255, 204, 0.6) !important;
+    box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 25px rgba(0, 255, 204, 0.25),
+        0 8px 32px rgba(0, 255, 204, 0.1) !important;
+    transform: translateY(-4px) scale(1.005) !important;
+}
+
+/* 5. Custom Themed Highlights (Frosted Color Bleed) */
+/* Media apps (Electric purple bleed) */
 .service-card:has(a[href*="jellyfin"]):hover, 
 .service-card:has(a[href*="seerr"]):hover {
-    border-color: #bc00dd !important;
+    border-color: rgba(188, 0, 221, 0.4) !important;
+    border-top-color: rgba(188, 0, 221, 0.6) !important;
     box-shadow: 
-        0 0 20px rgba(188, 0, 221, 0.35),
-        inset 0 0 8px rgba(188, 0, 221, 0.15) !important;
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 25px rgba(188, 0, 221, 0.25),
+        0 8px 32px rgba(188, 0, 221, 0.1) !important;
 }
 
-/* Downloader & Automation apps (Sonarr, Radarr, Prowlarr) get vibrant neon pink */
+/* Downloader & Automation apps (Neon magenta bleed) */
 .service-card:has(a[href*="sonarr"]):hover,
 .service-card:has(a[href*="radarr"]):hover,
 .service-card:has(a[href*="prowlarr"]):hover {
-    border-color: #ff0055 !important;
+    border-color: rgba(255, 0, 85, 0.4) !important;
+    border-top-color: rgba(255, 0, 85, 0.6) !important;
     box-shadow: 
-        0 0 20px rgba(255, 0, 85, 0.35),
-        inset 0 0 8px rgba(255, 0, 85, 0.15) !important;
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 25px rgba(255, 0, 85, 0.25),
+        0 8px 32px rgba(255, 0, 85, 0.1) !important;
 }
 
 /* 6. Glow-effects on Live Stats Indicators & Search */
