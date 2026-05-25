@@ -166,6 +166,8 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_SCHEDULE=0 0 4 * * *
       - DOCKER_API_VERSION=1.44 # Fixes API version mismatch with modern Docker daemons
+      - WATCHTOWER_HTTP_API_METRICS=true # Enable API Metrics
+      - WATCHTOWER_HTTP_API_TOKEN=WatchTowerSecretToken1! # API Token for Homepage
     restart: unless-stopped
     networks:
       - media_network

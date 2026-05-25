@@ -1,0 +1,18 @@
+services:
+  glances:
+    image: nicolargo/glances:latest-full
+    container_name: glances
+    restart: unless-stopped
+    pid: host # Required to monitor host system processes and temperatures
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - GLANCES_OPT=-w # Starts Glances in Web/API server mode
+    ports:
+      - "61208:61208" # Internal API port
+    networks:
+      - media_network
+
+networks:
+  media_network:
+    external: true

@@ -10,11 +10,13 @@
     target: _blank
     placeholder: SEARCH PROTOCOL...
 
-- resources:
-    label: system
+- glances:
+    url: http://glances:61208
+    label: server
     cpu: true
-    memory: true
-    disk: /
+    ram: true
+    temp: true # Displays CPU temperatures!
+    network: eth0 # Displays real-time network interface speeds!
 
 - openmeteo:
     label: Oshawa

@@ -1,0 +1,21 @@
+services:
+  speedtest-tracker:
+    image: ghcr.io/alexjustesen/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    ports:
+      - "8086:80" # Web UI and API
+    volumes:
+      - ./config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+      - DB_CONNECTION=sqlite
+      - APP_KEY=base64:eGl0MTIzNDU2Nzg5MGFiY2RlZmdoaWprbG1ub3BxcnM=
+    networks:
+      - media_network
+
+networks:
+  media_network:
+    external: true
