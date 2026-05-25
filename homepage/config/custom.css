@@ -7,8 +7,13 @@
     100% { transform: rotate(360deg); }
 }
 
-html, body {
+html {
     background-color: #07080e !important;
+}
+
+body {
+    background-color: transparent !important;
+    background: transparent !important;
     font-family: 'Rajdhani', sans-serif !important;
     color: #c9ccd8 !important;
     letter-spacing: 0.02em;
