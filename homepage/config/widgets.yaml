@@ -1,0 +1,27 @@
+# widgets.yaml - Global dashboard header widgets
+- datetime:
+    text_size: l
+    format:
+      timeStyle: short
+      dateStyle: medium
+
+- search:
+    provider: google
+    target: _blank
+    placeholder: SEARCH PROTOCOL...
+
+- resources:
+    label: system
+    cpu: true
+    memory: true
+    disk: /
+
+- openmeteo:
+    label: Oshawa
+    latitude: 43.8971
+    longitude: -78.8658
+    units: metric
+
+- docker:
+    label: containers
+    server: my-docker

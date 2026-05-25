@@ -1,0 +1,122 @@
+/* custom.css - Sleek Cyberpunk-Neon Theme for Homepage */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+/* 1. Global Page Background & Typography */
+body {
+    background-color: #07080e !important;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 0, 85, 0.07) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 255, 204, 0.07) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(188, 0, 221, 0.04) 0px, transparent 50%) !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #c9ccd8 !important;
+    letter-spacing: 0.02em;
+}
+
+/* 2. Cyberpunk Category & Section Headers */
+h2, .group-header {
+    font-family: 'Oxanium', sans-serif !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.18em !important;
+    color: #ff0055 !important;
+    text-shadow: 0 0 10px rgba(255, 0, 85, 0.6) !important;
+    border-bottom: 2px solid #00ffcc !important;
+    display: inline-block !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 24px !important;
+    position: relative;
+}
+
+/* Slanted tech tag effect on headers */
+h2::after, .group-header::after {
+    content: " // SYS_ACTIVE";
+    font-size: 0.55em;
+    font-weight: 600;
+    color: #00ffcc;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+/* 3. Sleek Card Container Grid Elements */
+.service-card, .bookmark-card, .widget-container, .widget {
+    background-color: rgba(11, 13, 24, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0, 255, 204, 0.12) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 4. Responsive Hover Glow and Translation Effects */
+.service-card:hover, .bookmark-card:hover {
+    border-color: #00ffcc !important;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 204, 0.35),
+        inset 0 0 8px rgba(0, 255, 204, 0.15) !important;
+    transform: translateY(-3px) scale(1.008) !important;
+}
+
+/* 5. Custom Themed Highlights per Application Class */
+/* Media apps (Jellyfin, Jellyseerr) get neon electric purple borders */
+.service-card:has(a[href*="jellyfin"]):hover, 
+.service-card:has(a[href*="seerr"]):hover {
+    border-color: #bc00dd !important;
+    box-shadow: 
+        0 0 20px rgba(188, 0, 221, 0.35),
+        inset 0 0 8px rgba(188, 0, 221, 0.15) !important;
+}
+
+/* Downloader & Automation apps (Sonarr, Radarr, Prowlarr) get vibrant neon pink */
+.service-card:has(a[href*="sonarr"]):hover,
+.service-card:has(a[href*="radarr"]):hover,
+.service-card:has(a[href*="prowlarr"]):hover {
+    border-color: #ff0055 !important;
+    box-shadow: 
+        0 0 20px rgba(255, 0, 85, 0.35),
+        inset 0 0 8px rgba(255, 0, 85, 0.15) !important;
+}
+
+/* 6. Glow-effects on Live Stats Indicators & Search */
+.status-indicator, span[class*="indicator"] {
+    box-shadow: 0 0 8px currentColor, 0 0 3px currentColor !important;
+}
+
+/* Search bar styling */
+input[type="text"], input[type="search"] {
+    background-color: rgba(11, 13, 24, 0.9) !important;
+    border: 1px solid rgba(0, 255, 204, 0.2) !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #00ffcc !important;
+    border-radius: 6px !important;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+input[type="text"]:focus {
+    border-color: #ff0055 !important;
+    box-shadow: 
+        0 0 10px rgba(255, 0, 85, 0.3),
+        inset 0 0 5px rgba(255, 0, 85, 0.1) !important;
+}
+
+/* 7. Scrollbar custom styled */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #07080e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 204, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff0055;
+}
