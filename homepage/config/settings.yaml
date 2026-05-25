@@ -15,3 +15,6 @@ layout:
   Core Infrastructure:
     style: grid
     columns: 3
+  Management:
+    style: grid
+    columns: 2

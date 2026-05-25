@@ -21,7 +21,3 @@
     latitude: 43.8971
     longitude: -78.8658
     units: metric
-
-- docker:
-    label: containers
-    server: my-docker

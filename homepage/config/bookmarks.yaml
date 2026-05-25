@@ -1,10 +1,1 @@
-# bookmarks.yaml - Fast-access external bookmarks
-- Management:
-    - Proxmox VE:
-        - abbr: PVE
-          href: https://192.168.1.3:8006/ # Adjust if you use a different IP/port for Proxmox UI
-          icon: mdi-server
-    - GitHub Repository:
-        - abbr: GIT
-          href: https://github.com/Trenterre/trent-docker-server
-          icon: mdi-github
+# bookmarks.yaml - Migrated to services.yaml for unified grid layout

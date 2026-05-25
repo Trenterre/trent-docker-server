@@ -105,3 +105,13 @@
         description: Configuration Backups
         server: my-docker
         container: duplicati
+
+- Management:
+    - Proxmox VE:
+        icon: proxmox.svg
+        href: https://192.168.1.3:8006/
+        description: Virtualization & Hypervisor Host
+    - GitHub Repository:
+        icon: github.svg
+        href: https://github.com/Trenterre/trent-docker-server
+        description: Infrastructure Git Source Code
