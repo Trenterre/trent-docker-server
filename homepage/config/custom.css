@@ -97,7 +97,7 @@ body::after {
     backface-visibility: hidden !important;
 }
 
-main::before {
+#__next::before {
     content: "" !important;
     position: fixed !important;
     width: 500px !important;
@@ -114,7 +114,7 @@ main::before {
     backface-visibility: hidden !important;
 }
 
-main::after {
+#__next::after {
     content: "" !important;
     position: fixed !important;
     width: 550px !important;
