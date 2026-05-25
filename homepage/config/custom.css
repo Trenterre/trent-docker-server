@@ -4,12 +4,13 @@
 /* 1. Global Page Background & Layout Tweaks */
 html {
     background-color: #04050d !important;
+    background: radial-gradient(circle at 50% 50%, #0a0d22 0%, #04050d 100%) !important; 
+    background-attachment: fixed !important;
 }
 
 body {
     background-color: transparent !important;
-    background: radial-gradient(circle at 50% 50%, #0a0d22 0%, #04050d 100%) !important; 
-    background-attachment: fixed !important;
+    background: transparent !important;
     font-family: 'Inter', sans-serif !important;
     color: #ffffff !important;
     position: relative;
@@ -61,25 +62,25 @@ span[class*="bg-"] {
     100% { transform: translate3d(0px, 0px, 0px) scale(1) rotate(-360deg); }
 }
 
-/* 3. Ambient Floating Light Blobs (GPU Accelerated, mapped to standard HTML/Body pseudo-elements) */
-html::before {
+/* 3. Ambient Floating Light Blobs (GPU Accelerated, mapped to standard Body & Main pseudo-elements) */
+body::before {
     content: "" !important;
     position: fixed !important;
     width: 600px !important;
     height: 600px !important;
     border-radius: 50% !important;
-    background: rgba(16, 185, 129, 0.2) !important; /* emerald-500/30 equivalent adjusted */
+    background: rgba(16, 185, 129, 0.22) !important; /* emerald-500/30 equivalent adjusted */
     filter: blur(90px) !important;
     top: -150px !important;
     left: -150px !important;
-    z-index: -10 !important;
+    z-index: -4 !important;
     pointer-events: none !important;
     animation: float-blob1 25s infinite ease-in-out !important;
     will-change: transform !important;
     backface-visibility: hidden !important;
 }
 
-html::after {
+body::after {
     content: "" !important;
     position: fixed !important;
     width: 700px !important;
@@ -89,14 +90,14 @@ html::after {
     filter: blur(100px) !important;
     bottom: -250px !important;
     right: -150px !important;
-    z-index: -9 !important;
+    z-index: -3 !important;
     pointer-events: none !important;
     animation: float-blob2 30s infinite ease-in-out !important;
     will-change: transform !important;
     backface-visibility: hidden !important;
 }
 
-body::before {
+main::before {
     content: "" !important;
     position: fixed !important;
     width: 500px !important;
@@ -106,14 +107,14 @@ body::before {
     filter: blur(80px) !important;
     top: 40% !important;
     left: 45% !important;
-    z-index: -8 !important;
+    z-index: -2 !important;
     pointer-events: none !important;
     animation: float-blob3 27s infinite ease-in-out !important;
     will-change: transform !important;
     backface-visibility: hidden !important;
 }
 
-body::after {
+main::after {
     content: "" !important;
     position: fixed !important;
     width: 550px !important;
@@ -123,7 +124,7 @@ body::after {
     filter: blur(95px) !important;
     top: 10% !important;
     right: 25% !important;
-    z-index: -7 !important;
+    z-index: -1 !important;
     pointer-events: none !important;
     animation: float-blob4 32s infinite ease-in-out !important;
     will-change: transform !important;
