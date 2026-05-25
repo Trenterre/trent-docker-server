@@ -9,7 +9,7 @@
         widget:
           type: jellyfin
           url: http://jellyfin:8096
-          key: JELLYFIN_API_KEY_HERE # Generate in Jellyfin -> Admin Dashboard -> API Keys
+          key: c9157163c3604457afb38cbfccf45be8
           
     - Jellyseerr:
         icon: jellyseerr.svg
@@ -32,7 +32,7 @@
           type: qbittorrent
           url: http://gluetun:8080 # Resolves through VPN internally!
           username: admin # Update if you use a custom WebUI username
-          password: QBIT_PASSWORD_HERE # Replace with your qBittorrent WebUI password
+          password: Torrent1!
 
 - Automation:
     - Sonarr:
