@@ -1,0 +1,16 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - "3000:3000" # Expose for initial setup, can be proxied and secured via NPM
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock # Allows live CPU/RAM monitoring of containers
+    networks:
+      - media_network
+
+networks:
+  media_network:
+    external: true

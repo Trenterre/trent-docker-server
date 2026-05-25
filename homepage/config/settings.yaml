@@ -1,0 +1,17 @@
+# settings.yaml - Dashboard Configuration Settings
+title: Home Lab Dashboard
+theme: dark # Ultra premium dark mode
+color: slate # Harmonious color palette
+favicon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homepage.png
+
+# Layout structure aligning services into clean grids
+layout:
+  Media Stack:
+    style: grid
+    columns: 2
+  Automation:
+    style: grid
+    columns: 4
+  Core Infrastructure:
+    style: grid
+    columns: 3

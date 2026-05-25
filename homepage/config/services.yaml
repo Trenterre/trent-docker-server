@@ -1,0 +1,107 @@
+# services.yaml - Application cards, widgets, and live API integrations
+- Media Stack:
+    - Jellyfin:
+        icon: jellyfin.svg
+        href: http://jellyfin.home.lan
+        description: Private Streaming Library
+        server: my-docker
+        container: jellyfin
+        widget:
+          type: jellyfin
+          url: http://jellyfin:8096
+          key: JELLYFIN_API_KEY_HERE # Generate in Jellyfin -> Admin Dashboard -> API Keys
+          
+    - Jellyseerr:
+        icon: jellyseerr.svg
+        href: http://seerr.home.lan
+        description: Media Request Portal
+        server: my-docker
+        container: jellyseerr
+        widget:
+          type: jellyseerr
+          url: http://jellyseerr:5055
+          key: JELLYSEERR_API_KEY_HERE # Generate in Jellyseerr -> Settings -> General -> API Key
+
+    - qBittorrent:
+        icon: qbittorrent.svg
+        href: http://torrent.home.lan
+        description: Seedbox & Torrent Engine
+        server: my-docker
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: http://gluetun:8080 # Resolves through VPN internally!
+          username: admin # Update if you use a custom WebUI username
+          password: QBIT_PASSWORD_HERE # Replace with your qBittorrent WebUI password
+
+- Automation:
+    - Sonarr:
+        icon: sonarr.svg
+        href: http://sonarr.home.lan
+        description: TV Automation
+        server: my-docker
+        container: sonarr
+        widget:
+          type: sonarr
+          url: http://sonarr:8989
+          key: 576a62271477469bb34e02fbbbb5657c # Automatically retrieved from your config!
+
+    - Radarr:
+        icon: radarr.svg
+        href: http://radarr.home.lan
+        description: Movie Automation
+        server: my-docker
+        container: radarr
+        widget:
+          type: radarr
+          url: http://radarr:7878
+          key: 4bb9cd191c2549cd84120187fbbc2e25 # Automatically retrieved from your config!
+
+    - Bazarr:
+        icon: bazarr.svg
+        href: http://bazarr.home.lan
+        description: Subtitle Automation & Whisper
+        server: my-docker
+        container: bazarr
+        widget:
+          type: bazarr
+          url: http://bazarr:6767
+          key: BAZARR_API_KEY_HERE # Retrieve from Bazarr -> Settings -> General -> API Key
+
+    - Prowlarr:
+        icon: prowlarr.svg
+        href: http://prowlarr.home.lan
+        description: Indexer Orchestration
+        server: my-docker
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: http://gluetun:9696 # Resolves through VPN internally!
+          key: 2d51e843aab042469739f4015e44a10d # Automatically retrieved from your config!
+
+- Core Infrastructure:
+    - Pi-hole:
+        icon: pi-hole.svg
+        href: http://192.168.1.3:8080/admin
+        description: DNS Resolver & Ad-Blocker
+        server: my-docker
+        container: pihole
+        widget:
+          type: pihole
+          url: http://pihole
+          version: 6 # Required for Pi-hole v6
+          key: PiHole1! # Placed from your server-wide secret configs
+
+    - Nginx Proxy Manager:
+        icon: nginx-proxy-manager.svg
+        href: http://192.168.1.3:81
+        description: Edge Routing & Certificates
+        server: my-docker
+        container: npm
+
+    - Duplicati:
+        icon: duplicati.svg
+        href: http://192.168.1.3:8200
+        description: Configuration Backups
+        server: my-docker
+        container: duplicati

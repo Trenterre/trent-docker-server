@@ -1,0 +1,3 @@
+# docker.yaml - Direct connection to the Docker daemon for container stats
+my-docker:
+  socket: /var/run/docker.sock

@@ -40,6 +40,12 @@ if (Test-Path $EnvPath) {
     scp $EnvPath "${RemoteHost}:${RemoteDir}/.env"
 }
 
+# 4b. Copy local config directories recursively if present
+if (Test-Path config) {
+    Write-Host "Copying config directory recursively..."
+    scp -r config "${RemoteHost}:${RemoteDir}/"
+}
+
 # 5. Run Docker Compose remotely
 Write-Host "Deploying containers remotely..."
 $ComposeCommand = "cd $RemoteDir && docker compose down && docker compose up -d"
