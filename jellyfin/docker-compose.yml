@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Toronto
-    ports:
-      - "8096:8096"
+    # ports:
+    #   - "8096:8096"
     devices:
       - /dev/dri:/dev/dri
     volumes:

@@ -33,8 +33,8 @@ services:
       - FIREWALL_INPUT_PORTS=8080,9696,8191
       - BLOCK_MALICIOUS=off
     ports:
-      - "8081:8080"     # qBittorrent WebUI (through VPN)
-      - "9696:9696"     # Prowlarr WebUI (through VPN)
+      # - "8081:8080"     # qBittorrent WebUI (through VPN)
+      # - "9696:9696"     # Prowlarr WebUI (through VPN)
       - "6881:6881"     # Torrent TCP
       - "6881:6881/udp" # Torrent UDP
     networks:
@@ -80,8 +80,8 @@ services:
     volumes:
       - ./config/sonarr:/config
       - /mnt/data:/data # <-- Restructured for atomic hard links
-    ports:
-      - "8989:8989"
+    # ports:
+    #   - "8989:8989"
     networks:
       - media_network
 
@@ -96,8 +96,8 @@ services:
     volumes:
       - ./config/radarr:/config
       - /mnt/data:/data # <-- Restructured for atomic hard links
-    ports:
-      - "7878:7878"
+    # ports:
+    #   - "7878:7878"
     networks:
       - media_network
 
@@ -122,8 +122,8 @@ services:
       - TZ=America/Toronto
     volumes:
       - ./config/jellyseerr:/app/config
-    ports:
-      - "5055:5055"
+    # ports:
+    #   - "5055:5055"
     networks:
       - media_network
 
@@ -137,8 +137,8 @@ services:
     volumes:
       - ./bazarr-config:/config
       - /mnt/data:/data # <-- Restructured for atomic hard links
-    ports:
-      - 6767:6767
+    # ports:
+    #   - 6767:6767
     restart: unless-stopped
     networks:
       - media_network
@@ -151,8 +151,8 @@ services:
       - ASR_ENGINE=openai_whisper
     volumes:
       - ./whisper-cache:/root/.cache/whisper
-    ports:
-      - 9000:9000
+    # ports:
+    #   - 9000:9000
     restart: unless-stopped
     networks:
       - media_network
