@@ -8,7 +8,7 @@
     100% { background-position: 0% 50%; }
 }
 
-body {
+html, body {
     background: linear-gradient(135deg, #05060b, #0c0512, #041012, #07080e) !important;
     background-size: 300% 300% !important;
     animation: cyberNebula 25s ease infinite !important;
@@ -16,6 +16,25 @@ body {
     color: #c9ccd8 !important;
     letter-spacing: 0.02em;
     position: relative;
+    min-height: 100vh;
+}
+
+/* Force Next.js, main layouts, and Tailwind background utility wrappers to be transparent */
+#__next, 
+.layout, 
+#app, 
+main,
+div[class*="bg-slate-"], 
+div[class*="bg-neutral-"], 
+div[class*="bg-zinc-"], 
+div[class*="bg-gray-"], 
+div[class*="bg-black"],
+div[class*="bg-background"],
+div[class*="bg-slate-900"],
+div[class*="bg-slate-950"],
+span[class*="bg-"] {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 body::before {
