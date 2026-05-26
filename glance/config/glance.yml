@@ -39,35 +39,35 @@ pages:
               - title: Media
                 links:
                   - title: Jellyfin
-                    url: http://192.168.1.3:8096
+                    url: http://jellyfin.home.lan
                     icon: si:jellyfin
                   - title: Jellyseerr
-                    url: http://192.168.1.3:5055
+                    url: http://seerr.home.lan
                     icon: mdi:movie-search
               - title: Automation
                 links:
                   - title: Sonarr
-                    url: http://192.168.1.3:8989
+                    url: http://sonarr.home.lan
                     icon: si:sonarr
                   - title: Radarr
-                    url: http://192.168.1.3:7878
+                    url: http://radarr.home.lan
                     icon: si:radarr
                   - title: Prowlarr
-                    url: http://192.168.1.3:9696
+                    url: http://prowlarr.home.lan
                     icon: mdi:magnify
                   - title: Bazarr
-                    url: http://192.168.1.3:6767
+                    url: http://bazarr.home.lan
                     icon: si:bazarr
               - title: Management
                 links:
                   - title: qBittorrent
-                    url: http://192.168.1.3:8081
+                    url: http://torrent.home.lan
                     icon: si:qbittorrent
                   - title: Pi-hole
-                    url: http://192.168.1.3:8080/admin
+                    url: http://pihole.home.lan
                     icon: si:pihole
                   - title: Nginx Proxy Manager
-                    url: http://192.168.1.3:81
+                    url: http://npm.home.lan
                     icon: si:nginxproxymanager
 
       - size: small # <-- Your second empty small column

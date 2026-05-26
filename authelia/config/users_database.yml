@@ -1,0 +1,8 @@
+# Authelia User Database
+users:
+  trent:
+    displayname: "Trent"
+    password: "$argon2id$v=19$m=65536,t=3,p=4$WtIU8NFqUWNTrRt1lLQvqg$m6krBuoccJ12kRy7jf56lqcLk0LIjz8i1OrZXe2VrsA" # Pre-hashed password for: Trent1!
+    email: trent@users.noreply.github.com
+    groups:
+      - admins

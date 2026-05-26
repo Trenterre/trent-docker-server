@@ -1,0 +1,77 @@
+# Authelia Central Configuration
+theme: dark
+
+server:
+  address: tcp://0.0.0.0:9091
+
+log:
+  level: info
+
+identity_validation:
+  reset_password:
+    jwt_secret: ${AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET}
+
+totp:
+  issuer: Authelia (HomeLab)
+  period: 30
+  skew: 1
+
+authentication_backend:
+  file:
+    path: /config/users_database.yml
+    password:
+      algorithm: argon2
+      argon2:
+        variant: argon2id
+        iterations: 3
+        memory: 65536
+        parallelism: 4
+
+access_control:
+  default_policy: deny
+  rules:
+    # 1. Bypass SSO for Authelia's own static portal resources
+    - domain: auth.home.lan
+      policy: bypass
+
+    # 2. Enforce 2FA/MFA for Proxmox VE, Duplicati, and NPM
+    - domain:
+        - proxmox.home.lan
+        - npm.home.lan
+        - backup.home.lan
+      policy: two_factor
+
+    # 3. Enforce 1FA (Password only) for automation and catalog download managers
+    - domain:
+        - sonarr.home.lan
+        - radarr.home.lan
+        - bazarr.home.lan
+        - prowlarr.home.lan
+        - torrent.home.lan
+        - speedtest.home.lan
+        - pihole.home.lan
+      policy: one_factor
+
+session:
+  name: authelia_session
+  same_site: lax
+  expiration: 3600h # 15 days persistent session duration
+  inactivity: 120h  # 5 days idle session duration
+  remember_me: 1M
+  cookies:
+    - domain: home.lan
+      authelia_url: https://auth.home.lan
+
+storage:
+  encryption_key: ${AUTHELIA_STORAGE_ENCRYPTION_KEY}
+  local:
+    path: /config/db.sqlite3
+
+regulation:
+  max_retries: 5
+  find_time: 120
+  ban_time: 300
+
+notifier:
+  filesystem:
+    filename: /config/notification.txt # Keeps TOTP registration local. No SMTP needed!

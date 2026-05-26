@@ -82,7 +82,7 @@
 - Core Infrastructure:
     - Pi-hole:
         icon: pi-hole.svg
-        href: http://192.168.1.3:8080/admin
+        href: http://pihole.home.lan
         description: DNS Resolver & Ad-Blocker
         server: my-docker
         container: pihole
@@ -94,21 +94,21 @@
 
     - Nginx Proxy Manager:
         icon: nginx-proxy-manager.svg
-        href: http://192.168.1.3:81
+        href: http://npm.home.lan
         description: Edge Routing & Certificates
         server: my-docker
         container: npm
 
     - Duplicati:
         icon: duplicati.svg
-        href: http://192.168.1.3:8200
+        href: http://backup.home.lan
         description: Configuration Backups
         server: my-docker
         container: duplicati
 
     - Speedtest Tracker:
         icon: speedtest-tracker.png
-        href: http://192.168.1.3:8086
+        href: http://speedtest.home.lan
         description: WAN Speed Diagnostics
         server: my-docker
         container: speedtest-tracker
@@ -126,11 +126,18 @@
           url: http://watchtower:8080
           key: WatchTowerSecretToken1!
 
+    - Authelia SSO:
+        icon: authelia.png
+        href: https://auth.home.lan
+        description: Centralized Identity Portal
+        server: my-docker
+        container: authelia
+
 - Management:
     - Proxmox VE:
         icon: proxmox.svg
-        href: https://192.168.1.3:8006/
-        description: Virtualization & Hypervisor Host
+        href: https://proxmox.home.lan
+        description: Virtualization & Hypervisor Host (192.168.1.2)
     - GitHub Repository:
         icon: github.svg
         href: https://github.com/Trenterre/trent-docker-server
