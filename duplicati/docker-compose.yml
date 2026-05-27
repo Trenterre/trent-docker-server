@@ -14,3 +14,9 @@ services:
     volumes:
       - ./config:/config
       - /home/trent/docker:/source/docker # This makes your Docker configs available to back up
+    networks:
+      - media_network
+
+networks:
+  media_network:
+    external: true
