@@ -82,7 +82,7 @@
 - Core Infrastructure:
     - Pi-hole:
         icon: pi-hole.svg
-        href: http://pihole.home.lan
+        href: https://pihole.home.lan/admin/login
         description: DNS Resolver & Ad-Blocker
         server: my-docker
         container: pihole
