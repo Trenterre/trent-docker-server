@@ -74,5 +74,9 @@ regulation:
   ban_time: 300
 
 notifier:
-  filesystem:
-    filename: /config/notification.txt # Keeps TOTP registration local. No SMTP needed!
+  disable_startup_check: false
+  smtp:
+    address: submission://smtp.gmail.com:587
+    sender: Authelia <trentman696@gmail.com>
+    username: trentman696@gmail.com
+    password: ${AUTHELIA_NOTIFIER_SMTP_PASSWORD}
