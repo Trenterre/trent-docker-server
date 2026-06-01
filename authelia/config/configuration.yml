@@ -50,6 +50,7 @@ access_control:
         - torrent.home.lan
         - speedtest.home.lan
         - pihole.home.lan
+        - home.home.lan
       policy: one_factor
 
 session:

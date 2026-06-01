@@ -133,6 +133,14 @@
         server: my-docker
         container: authelia
 
+- Smart Home:
+    - Home Assistant:
+        icon: home-assistant.svg
+        href: https://home.home.lan
+        description: Smart Home Orchestration & Automations
+        server: my-docker
+        container: homeassistant
+
 - Management:
     - Proxmox VE:
         icon: proxmox.svg
