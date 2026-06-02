@@ -23,3 +23,10 @@ google_assistant:
     - light
     - climate
     - media_player
+    - input_boolean
+
+input_boolean:
+  google_test_switch:
+    name: "Google Test Switch"
+    icon: mdi:power
+
