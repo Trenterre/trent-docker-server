@@ -13,3 +13,13 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 172.21.0.0/16
+
+google_assistant:
+  project_id: !secret google_project_id
+  service_account: !secret google_service_account
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+    - climate
+    - media_player
