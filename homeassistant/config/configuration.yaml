@@ -30,3 +30,14 @@ input_boolean:
     name: "Google Test Switch"
     icon: mdi:power
 
+recorder:
+  db_url: !secret db_connection_url
+  purge_keep_days: 7
+  exclude:
+    domains:
+      - update
+      - systemmonitor
+    entity_globs:
+      - sensor.glances_*
+      - sensor.speedtest_*
+

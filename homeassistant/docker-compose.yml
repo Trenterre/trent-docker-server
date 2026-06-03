@@ -8,9 +8,22 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - TZ=America/Toronto
-    networks:
-      - media_network
+    # Host Network Mode binds directly to the VM's network interfaces for auto-discovery
+    network_mode: host
+    depends_on:
+      - mariadb
 
-networks:
-  media_network:
-    external: true
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=homeassistant
+      - MYSQL_USER=homeassistant
+      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql
+    # Only expose port 3306 locally on the loopback adapter for security!
+    ports:
+      - "127.0.0.1:3306:3306"
